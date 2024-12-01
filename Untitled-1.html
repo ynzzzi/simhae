@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Sea</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200&family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Noto Sans', sans-serif; /* 기본 폰트 설정 */
+        }
+
+    
+        h1 {
+        font-family: 'Noto Sans', sans-serif; !important;  /* Noto Sans 폰트 지정 */
+        font-size: 4rem; /* 크기 유지 */
+        font-weight: 700; /* 굵기 설정 */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+
+    h3 {
+        font-family: 'Noto Sans', sans-serif; !important;  /* Noto Sans 폰트 지정 */
+
+    }
+
+            /* 01 숫자 스타일 */
+            .page-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Hero Section 스타일 */
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 페이드인 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+/* Ensure visibility for sections */
+.section {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-fade-in.is-visible {
+            opacity: 1;
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: black);
+            z-index: 1000;
+        }
+
+        .progress-bar__fill {
+            height: 100%;
+            background: #3a608f;
+            transition: width 300ms ease;
+        }
+
+        .nav-gradient {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), transparent);
+        }
+
+        .section-gradient {
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+        }
+
+     /* 갤러리 섹션 배경색을 검정색으로 변경 */
+     .gallery-section {
+        background-color: black; /* 배경색 변경 */
+        color: white;
+        padding: 2rem;
+    }
+
+        .card-hover {
+            transition: all 0.5s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+        }
+
+        .image-hover {
+            transition: transform 0.5s ease;
+        }
+
+        .card-hover:hover .image-hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white">
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-bar__fill" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-40 nav-gradient">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-400"> </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-blue-400 transition-colors"> </a>
+                <a href="#" class="hover:text-blue-400 transition-colors"> </a>
+                <a href="Untitled3.html" class="hover:text-blue-400 transition-colors"> home </a>
+                <a href="sparkle.html" class="hover:text-blue-400 transition-colors">explore</a>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- 배경 이미지 -->
+        <img src="img/beach.jpg" alt="Hero Background" class="hero-background">
+        
+        <!-- 숫자 -->
+        <div class="page-number">01</div>
+        
+        <!-- 콘텐츠 -->
+        <div class="hero-content">
+            <h1>표해수층</h1>
+            <p class="text-xl text-blue-200">
+                 
+            </p>
+        </div>
+    </section>
+
+
+    </div>
+    </section>
+
+ 
+
+
+
+
+    <!-- Interview Section -->
+    <section class="section py-32 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in">
+                <div class="relative">
+                    <img src="img/ff.jpg" alt="Diver" class="rounded-lg">
+                </div>
+                <div>
+                    <h4 class="text-blue-400 mb-4"> </h4>
+                    <h3> </h3>
+                    <p class="text-blue-200 mb-8">
+                        표해수층은 바다의 표면입니다. 수심 0~200m 구간이 해당하며<br>
+                        일반적으로 우리가 경험하는 그 바다를 표해수층이라고 할 수 있습니다.
+                    </p>
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors">
+                         
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section py-32 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in">
+                <div>
+                    <h4 class="text-blue-400 mb-4">             </h4>
+                    <h3> </h3>
+                    <p class="text-blue-200 mb-8">
+                        수심이 깊지 않은 표해수층은 햇빛 투과율이 높은 '유광층'이며 <br>수온이 20도 이상으로 따듯합니다.<br> 식물성
+                        플랑크톤과 해조류가 살아가기 좋은 곳이기도 합니다.
+                    </p>
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors">
+                         
+                    </button>
+                </div>
+                <div class="relative">
+                    <img src="img/f.jpg" alt="Diver" class="rounded-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section py-32 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in">
+                <div class="relative">
+                    <img src="img/4.jpg" alt="Diver" class="rounded-lg">
+                </div>
+                <div>
+                    <h4 class="text-blue-400 mb-4">      </h4>
+
+                    <p class="text-blue-200 mb-8">
+                        해양학에서의 심해는 2,000m를 의미하지만, 생태학에서는 200m부터<br>
+                        심해로 취급하기 때문에 우리가 일반적으로 먹는 어류들이 심해어에 속하기도 합니다.
+                    </p>
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors">
+                         
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+    </section>
+   <!-- Marine Life Gallery -->
+   <section class="gallery-section">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="card-hover relative overflow-hidden rounded-lg">
+                <img src="img/4.png" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
+            </div>
+            <div class="card-hover relative overflow-hidden rounded-lg">
+                <img src="img/1.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
+            </div>
+            <div class="card-hover relative overflow-hidden rounded-lg">
+                <img src="img/2.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
+            </div>
+            <div class="card-hover relative overflow-hidden rounded-lg">
+                <img src="img/3.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
+                <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
+            </div>
+                                                          
+            <!-- Repeat for other marine life cards -->
+        </div>
+    </div>
+</section>
+
+<br>
+<br>
+<br>
+    <!-- Learning Section -->
+    <section class="py-32 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-serif text-center mb-16">
+                Another depth
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300">
+                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50"></div>
+                    <h3 class="text-xl font-bold mb-4">중심해수층</h3>
+                    <p class="text-blue-200 mb-6">Begin your diving journey with basic certification and guided experiences.</p>
+                    <a href="중심해수층.html"><button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button></a>
+                </div>
+
+
+                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300">
+                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50"></div>
+                    <h3 class="text-xl font-bold mb-4">심해중층</h3>
+                    <p class="text-blue-200 mb-6">Begin your diving journey with basic certification and guided experiences.</p>
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button>
+                </div>
+                
+                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300">
+                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50"></div>
+                    <h3 class="text-xl font-bold mb-4">심해수층</h3>
+                    <p class="text-blue-200 mb-6">Begin your diving journey with basic certification and guided experiences.</p>
+                    <button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button>
+                </div>
+                                <!-- Repeat for other learning cards -->
+            </div>
+        </div>
+    </section>
+                
+    <script>
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Noto Sans', 'sans-serif'], // 기본 sans-serif를 Noto Sans로 변경
+      },
+    },
+  },
+};
+
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalScroll) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // 각 섹션마다 약간씩 다른 딜레이 추가
+                const delay = Math.random() * 200; // 0-200ms 사이 랜덤 딜레이
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, delay);
+            }
+        });
+    }, {
+        threshold: 0.4 // 섹션의 10%가 보일 때 애니메이션 시작
+    });
+
+    // 모든 섹션에 Observer 적용
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
+});
+    </script>
+</body>
+</html>

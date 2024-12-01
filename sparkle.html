@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>심해어 소개</title>
+    <style>
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+.loading-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+.submarine-container {
+    position: relative;
+    cursor: pointer;
+}
+
+#submarine {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* 클릭 시 크기 변화 */
+}
+
+#submarine.animate {
+    animation: submarine-click-animation 1s forwards; /* 클릭 애니메이션 */
+}
+
+.ripple {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    animation: ripple-animation 3s ease-out forwards;
+}
+
+@keyframes ripple-animation {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(10);
+        opacity: 0;
+    }
+}
+
+@keyframes submarine-click-animation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.9); /* 잠시 작아짐 */
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.2); /* 다시 커짐 */
+        opacity: 0; /* 투명해짐 */
+    }
+}
+
+#submarine {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* 크기 변화 애니메이션 */
+}
+
+#submarine.animate {
+    animation: submarine-click-animation 1s forwards; /* 1초 동안 애니메이션 */
+}
+
+        /* 메인 화면 (첫 화면) */
+        .main-banner {
+            height: 100vh;
+            background: #68aeca; /* 해저 0미터 배경색과 동일하게 설정 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* 메인 화면의 텍스트 */
+        .main-banner h2 {
+            color: white;
+            font-size: 24px;
+            z-index: 2;
+        }
+
+        /* 아래로 스크롤하라는 화살표 */
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            color: white;
+            animation: bounce 1.5s infinite;
+            z-index: 2;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, 10px);
+            }
+        }
+
+        /* 바다 배경 및 스크롤 가능한 영역 */
+        .ocean {
+            position: relative;
+            height: 20920px;
+            background: linear-gradient(to bottom, #68aeca 0%, #020202 15%, #000000 100%);
+        }
+
+        /* '해저n미터' 표시하는 텍스트 */
+        .depth {
+            position: fixed;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18pt;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; /* 초기에는 숨김 상태 */
+            transition: opacity 0.5s ease;
+        }
+
+        /* 세로선 */
+        .line {
+            height: 150px;
+            width: 2px;
+            background-color: white;
+            margin-bottom: 10px;
+        }
+
+        /* 텍스트 가로 방향 */
+        #depthText {
+            writing-mode: horizontal-tb;
+            text-align: center;
+        }
+
+        /* 물고기 이미지와 이름을 포함하는 컨테이너 */
+        .fish-container {
+            position: absolute;
+            text-align: center;
+            opacity: 0; /* 처음에는 보이지 않음 */
+            transform: translateY(50px); /* 처음에는 아래에서 대기 */
+            transition: opacity 0.6s ease, transform 0.6s ease; /* 서서히 나타나는 효과 */
+        }
+
+        /* 스크롤이 트리거된 후 활성화되는 클래스 */
+        .fish-container.visible {
+            opacity: 1; /* 서서히 나타남 */
+            transform: translateY(0); /* 제자리로 올라옴 */
+        }
+
+        /* 물고기 이미지 크기 설정 */
+        .fish1 img { width: 150px; height: auto; }
+        .fish2 img { width: 180px; height: auto; }
+        .fish3 img { width: 250px; height: auto; }
+        .fish4 img { width: 150px; height: auto; }
+        .fish5 img { width: 120px; height: auto; }
+        .fish6 img { width: 150px; height: auto; }
+        .fish7 img { width: 350px; height: auto; }
+        .fish9 img { width: 250px; height: auto; }
+        .fish10 img { width: 250px; height: auto; }
+        .fish11 img { width: 100px; height: auto; }
+        .fish12 img { width: 300px; height: auto; }
+        .fish13 img { width: 300px; height: auto; }
+        .fish14 img { width: 250px; height: auto; }
+        .fish15 img { width: 200px; height: auto; }
+        .fish16 img { width: 300px; height: auto; }
+        .fish17 img { width: 200px; height: auto; }
+        .fish18 img { width: 200px; height: auto; }
+        .fish19 img { width: 600px; height: auto; }
+        .fish20 img { width: 750px; height: auto; }
+        .fish21 img { width: 300px; height: auto; }
+        .fish22 img { width: 200px; height: auto; }
+        .fish23 img { width: 300px; height: auto; }
+        .fish24 img { width: 300px; height: auto; }
+        .fish25 img { width: 150px; height: auto; }
+        .fish26 img { width: 250px; height: auto; }
+        .fish27 img { width: 120px; height: auto; }
+        .fish28 img { width: 200px; height: auto; }
+        .fish29 img { width: 550px; height: auto; }
+        .fish30 img { width: 550px; height: auto; }
+        .fish31 img { width: 250px; height: auto; }
+        .fish32 img { width: 350px; height: auto; }
+        .fish33 img { width: 230px; height: auto; }
+        .fish34 img { width: 200px; height: auto; }
+        .fish35 img { width: 200px; height: auto; }
+        .fish36 img { width: 200px; height: auto; }
+        .fish37 img { width: 500px; height: auto; }
+        .fish38 img { width: 450px; height: auto; }
+        .fish39 img { width: 50px; height: auto; }
+        .fish40 img { width: 250px; height: auto; }
+        .fish41 img { width: 270px; height: auto; }
+        .fish42 img { width: 650px; height: auto; }
+
+
+        /* 물고기 이름 스타일 */
+        .fish-container p {
+            color: #EAEAEA;
+            margin: 5px 0 0 0;
+        }
+
+        /* 물고기 위치 설정 (해저 100미터 내 무작위 배치) */
+        .fish1 { top: 100px; left: 20%; }
+        .fish2 { top: 350px; right: 30%; }
+        .fish3 { top: 550px; left: 30%; }
+        .fish4 { top: 650px; right: 15%; }
+        .fish5 { top: 800px; left: 15%; }
+        .fish6 { top: 1100px; left: 40%; }
+        .fish7 { top: 1200px; right: 20%; }
+        .fish8 { top: 1800px; left: 15%; }
+        .fish9 { top: 2700px; left: 30%; }
+        .fish10 { top: 3000px; right: 25%; }
+        .fish11 { top: 3900px; left: 25%; }
+        .fish12 { top: 4050px; right: 20%; }
+        .fish13 { top: 4300px; right: 40%; }
+        .fish14 { top: 4900px; right: 50%; }
+        .fish15 { top: 5300px; right: 40%; }
+        .fish16 { top: 6100px; left: 30%; }
+        .fish17 { top: 6500px; left: 50%; }
+        .fish18 { top: 7000px; right: 35%; }
+        .fish19 { top: 7500px; left: 30%; }
+        .fish20 { top: 8200px; left: 40%; }
+        .fish21 { top: 9000px; left: 25%; }
+        .fish22 { top: 9300px; right: 30%; }
+        .fish23 { top: 9800px; left: 35%;  }
+        .fish24 { top: 11500px; right: 35%;  }
+        .fish25 { top: 12000px; left: 35%;  }
+        .fish26 { top: 12500px; left: 55%;  }
+        .fish27 { top: 13000px; left: 65%;  }
+        .fish28 { top: 13300px; left: 35%;  }
+        .fish29 { top: 14000px; left: 45%;  }
+        .fish30 { top: 14600px; left: 35%;  }
+        .fish31 { top: 15250px; left: 25%;  }
+        .fish32 { top: 15850px; left: 40%;  }
+        .fish33 { top: 16050px; left: 65%;  }
+        .fish34 { top: 16400px; left: 30%;  }
+        .fish35 { top: 17000px; left: 65%;  }
+        .fish36 { top: 17300px; left: 30%;  }
+        .fish37 { top: 17800px; left: 43%;  }
+        .fish38 { top: 18200px; left: 35%;  }
+        .fish39 { top: 18460px; right: 15%;  }
+        .fish40 { top: 19010px; left: 43%;  }
+        .fish41 { top: 19510px; left: 63%;  }
+        .fish42 { top: 20010px; left: 30%;  }
+
+
+
+        /* 이벤트 표시점 스타일 */
+        .event {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            font-style: bold;
+            font-size: 20px;
+            color: rgb(154, 174, 218);
+        }
+
+
+
+        /* 이벤트 이미지 추가 */
+        .event img {
+            width: 350px; /* 이미지 크기 조절 */
+            height: auto;
+            margin-bottom: 10px; /* 점선과 이미지 간격 */
+        }
+
+        /* 이벤트 위치 (1미터 = 10px 비율로 설정, 메인 배너 높이 추가 계산) */
+        .event195 { top: calc(1500px + 100vh); }
+        .event317 { top: calc(2470px + 100vh); }
+        .event535 { top: calc(4850px + 100vh); }
+        .event1035 { top: calc(9800px + 100vh); }
+
+        /* 해수층 선택 상자 스타일 (크기 키우고 테두리 없앰, 스크롤에 고정) */
+        .layer-select {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 10;
+            opacity: 0; /* 초기에는 숨김 상태 */
+            transition: opacity 0.5s ease;
+        }
+
+        /* 맨 위로 스크롤하는 화살표 버튼 */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 1.5cm;
+            height: 1.5cm;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .scroll-top::before {
+            content: '▲';
+            font-size: 24px;
+            color: black;
+        }
+
+/* 파티클 컨테이너 스타일 */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* 개별 파티클 스타일 */
+.particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.1) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 15s infinite linear, glow 3s infinite ease-in-out;
+}
+
+/* 부유 애니메이션 */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px);
+    }
+    50% {
+        transform: translateY(0) translateX(20px);
+    }
+    75% {
+        transform: translateY(20px) translateX(10px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+/* 반짝임 애니메이션 */
+@keyframes glow {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+    </style>
+</head>
+<body>
+
+
+    <div id="loading-screen" class="loading-screen">
+        <div class="submarine-container">
+            <img id="submarine" src="fish/잠수함.png" alt="잠수함 이미지">
+        </div>
+    </div>
+
+<div class="particles-container" id="particlesContainer"></div>
+    <!-- 메인 화면 (스크롤 상단의 첫 화면) -->
+    <div class="main-banner">
+        <h2>잠수완료! <br>스크롤을 내려 심해를 탐색해보아요</h2>
+        <div class="wave"></div> <!-- 파도 애니메이션 -->
+        <div class="scroll-down-arrow">▼</div> <!-- 밑으로 향하는 화살표 -->
+    </div>
+
+    <!-- 심해어 소개 섹션 -->
+    <div class="ocean">
+        <!-- 해수층 선택 상자 -->
+        <select class="layer-select" id="layerSelect">
+            <option value="0">표해수층 (0미터)</option>
+            <option value="200">중심해층 (200미터)</option>
+            <option value="1000">무광층 (1000미터)</option>
+        </select>
+
+        <!-- 특정 깊이에 이벤트 표시 -->
+        <div class="event event195">
+            <div class="event-line"></div>
+            -햇빛이 닿는 최저 깊이 (195m)
+        </div>
+        <div class="event event317">
+            <img src="img//swimi.png" alt="물고기2">
+            <div class="event-line"></div>
+            스쿠버다이빙 잠수 기록 (317m)
+        </div>
+        <div class="event event535">
+            <img src="fish/penguin.png" alt="물고기3">
+            <div class="event-line"></div>
+            황제펭귄 잠수 기록 (535m)
+        </div>
+
+
+        <div class="event event1035">
+
+            <img src="fish/잠수함.png" alt="물고기4">
+            <div class="event-line"></div>
+            군용 잠수함 평균 잠영 깊이 (1035m)
+        </div>
+
+        <!-- 무작위로 배치된 물고기 이미지들과 이름 -->
+        <div class="fish-container fish1">
+            <a href="fish1-details.html">
+                <img src="fish/가자미.png" class="fish" alt="물고기 1">
+            </a>
+            <p>가자미</p>
+        </div>
+        <div class="fish-container fish2">
+            <a href="대구/test.html">
+                <img src="fish/대서양대구.png" class="fish" alt="물고기 2">
+            </a>
+            <p>태평양대구</p>
+        </div>
+        <div class="fish-container fish3">
+            <a href="fish3-details.html">
+                <img src="fish/만새기.png" class="fish" alt="물고기 3">
+            </a>
+            <p>만새기</p>
+        </div>
+        <div class="fish-container fish4">
+            <a href="fish4-details.html">
+                <img src="fish/연어.png" class="fish" alt="물고기 4">
+            </a>
+            <p>연어</p>
+        </div>
+        <div class="fish-container fish5">
+            <a href="fish5-details.html">
+                <img src="fish/줄농어.png" class="fish" alt="물고기 5">
+            </a>
+            <p>줄농어</p>
+        </div>
+
+        <div class="fish-container fish6">
+            <a href="fish6-details.html">
+                <img src="fish/바다거북.png" class="fish" alt="물고기 6">
+            </a>
+            <p>바다거북</p>
+        </div>
+
+        <div class="fish-container fish7">
+            <a href="fish5-details.html">
+                <img src="fish/범고래.png" class="fish" alt="물고기 7">
+            </a>
+            <p>범고래</p>
+        </div>    
+ 
+        <div class="fish-container fish8">
+            <a href="fish5-details.html">
+                <img src="fish/bullshark.png" class="fish" alt="물고기 8">
+            </a>
+            <p>황소상어</p>
+        </div>    
+
+        <div class="fish-container fish9">
+            <a href="fish5-details.html">
+                <img src="fish/wolf.png" class="fish" alt="물고기 9">
+            </a>
+            <p>늑대장어</p>
+        </div>        
+
+        <div class="fish-container fish10">
+            <a href="fish5-details.html">
+                <img src="fish/turtle.png" class="fish" alt="물고기 10">
+            </a>
+            <p>올리브바다거북</p>
+        </div>  
+
+        <div class="fish-container fish11">
+            <a href="fish5-details.html">
+                <img src="fish/Squid.png" class="fish" alt="물고기 11">
+            </a>
+            <p>앵무새 오징어</p>
+        </div> 
+
+        <div class="fish-container fish12">
+            <a href="fish5-details.html">
+                <img src="fish/lobster.png" class="fish" alt="물고기 12">
+            </a>
+            <p>발톱 랍스터</p>
+        </div> 
+
+
+        <div class="fish-container fish13">
+            <a href="fish5-details.html">
+                <img src="fish/fsquid.png" class="fish" alt="물고기 13">
+            </a>
+            <p>매오징어</p>
+        </div> 
+
+        <div class="fish-container fish14">
+            <a href="fish5-details.html">
+                <img src="fish/tuna.png" class="fish" alt="물고기 14">
+            </a>
+            <p>눈다랑어</p>
+        </div> 
+        
+        <div class="fish-container fish15">
+            <a href="fish5-details.html">
+                <img src="fish/angel.png" class="fish" alt="물고기 15">
+            </a>
+            <p>무각익족류</p>Swordfish
+        </div> 
+        
+        <div class="fish-container fish16">
+            <a href="fish5-details.html">
+                <img src="fish/Swordfish.png" class="fish" alt="물고기 16">
+            </a>
+            <p>황새치</p>
+        </div> 
+        
+        <div class="fish-container fish17">
+            <a href="fish5-details.html">
+                <img src="fish/gae.png" class="fish" alt="물고기 17">
+            </a>
+            <p>개복치</p>
+        </div>         
+
+        <div class="fish-container fish18">
+            <a href="fish5-details.html">
+                <img src="fish/Coelacanth.png" class="fish" alt="물고기 18">
+            </a>
+            <p>실러캔스</p>
+        </div>    
+
+        <div class="fish-container fish19">
+            <a href="fish5-details.html">
+                <img src="fish/octopus.png" class="fish" alt="물고기 19">
+            </a>
+            <p>대왕문어</p>
+        </div>  
+
+        <div class="fish-container fish20">
+            <a href="fish5-details.html">
+                <img src="fish/ribbon.png" class="fish" alt="물고기 20">
+            </a>
+            <p>리본이악어</p>
+        </div> 
+
+        <div class="fish-container fish21">
+            <a href="fish5-details.html">
+                <img src="fish/Monkfish.png" class="fish" alt="물고기 21">
+            </a>
+            <p>아귀</p>
+        </div> 
+
+        <div class="fish-container fish22">
+            <a href="fish5-details.html">
+                <img src="fish/figure.png" class="fish" alt="물고기 22">
+            </a>
+            <p>다모류</p>
+        </div> 
+
+        <div class="fish-container fish23">
+            <a href="fish5-details.html">
+                <img src="fish/leatherback.png" class="fish" alt="물고기 23">
+            </a>
+            <p>장수거북</p>
+        </div> 
+
+        <div class="fish-container fish24">
+            <a href="fish5-details.html">
+                <img src="fish/aaa.png" class="fish" alt="물고기 24">
+            </a>
+            <p>아귀목</p>
+        </div> 
+
+        <div class="fish-container fish25">
+            <a href="fish5-details.html">
+                <img src="fish/Phronima.jpg" class="fish" alt="물고기 25">
+            </a>
+            <p>프로니마</p>
+        </div> 
+
+        <div class="fish-container fish26">
+            <a href="fish5-details.html">
+                <img src="fish/Orange.png" class="fish" alt="물고기 26">
+            </a>
+            <p>오렌지 라피</p>
+        </div> 
+
+        <div class="fish-container fish27">
+            <a href="fish5-details.html">
+                <img src="fish/venus.png" class="fish" alt="물고기 27">
+            </a>
+            <p>비너스 파리지옥 말미잘</p>
+        </div> 
+
+        <div class="fish-container fish28">
+            <a href="fish5-details.html">
+                <img src="fish/blob.png" class="fish" alt="물고기 28">
+            </a>
+            <p>블롭피쉬</p>
+        </div> 
+
+        <div class="fish-container fish29">
+            <a href="fish5-details.html">
+                <img src="fish/jjj.png" class="fish" alt="물고기 29">
+            </a>
+            <p>주름상어</p>
+        </div> 
+
+        <div class="fish-container fish30">
+            <a href="fish5-details.html">
+                <img src="fish/go.png" class="fish" alt="물고기 30">
+            </a>
+            <p>마귀상어</p>
+        </div> 
+
+
+        <div class="fish-container fish31">
+            <a href="fish5-details.html">
+                <img src="fish/unnamed.jpg" class="fish" alt="물고기 31">
+            </a>
+            <p>납작앨둥이</p>
+        </div> 
+
+        <div class="fish-container fish32">
+            <a href="fish5-details.html">
+                <img src="fish/dragon.png" class="fish" alt="물고기 32">
+            </a>
+            <p>드래곤 피시</p>
+        </div> 
+
+        <div class="fish-container fish33">
+            <a href="fish5-details.html">
+                <img src="fish/red.png" class="fish" alt="물고기 33">
+            </a>
+            <p>붉은 해파리</p>
+        </div> 
+
+        <div class="fish-container fish34">
+            <a href="fish5-details.html">
+                <img src="fish/black.png" class="fish" alt="물고기 34">
+            </a>
+            <p>검정 가자미</p>
+        </div> 
+
+        <div class="fish-container fish35">
+            <a href="fish5-details.html">
+                <img src="fish/worm.png" class="fish" alt="물고기 35">
+            </a>
+            <p>갈라파고스민고삐수염벌레</p>
+        </div> 
+
+        <div class="fish-container fish36">
+            <a href="fish5-details.html">
+                <img src="fish/Yeti.webp" class="fish" alt="물고기 36">
+            </a>
+            <p>설인 게</p>
+        </div> 
+
+        <div class="fish-container fish37">
+            <a href="fish5-details.html">
+                <img src="fish/shs.png" class="fish" alt="물고기 37">
+            </a>
+            <p>뭉툭코여섯줄아가미상어</p>
+        </div> 
+
+        <div class="fish-container fish38">
+            <a href="fish5-details.html">
+                <img src="fish/bbul.png" class="fish" alt="물고기 38">
+            </a>
+            <p>외뿔고래</p>
+        </div> 
+
+        <div class="fish-container fish39">
+            <a href="fish5-details.html">
+                <img src="fish/pen.png" class="fish" alt="물고기 39">
+            </a>
+            <p>가시선인장</p>
+        </div> 
+
+        <div class="fish-container fish40">
+            <a href="fish5-details.html">
+                <img src="fish/octo.png" class="fish" alt="물고기 40">
+            </a>
+            <p>망원경문어</p>
+        </div> 
+
+        <div class="fish-container fish41">
+            <a href="fish5-details.html">
+                <img src="fish/www.jpg" class="fish" alt="물고기 41">
+            </a>
+            <p>심해 등각류</p>
+        </div> 
+
+        <div class="fish-container fish42">
+            <a href="fish5-details.html">
+                <img src="fish/ooc.png" class="fish" alt="물고기 42">
+            </a>
+            <p>남극하트지느러미오징어</p>
+        </div> 
+
+
+    </div>
+
+    <!-- 해저 깊이 표시 -->
+    <div class="depth">
+        <div class="line"></div>
+        <span id="depthText">해저<br>0m</span>
+    </div>
+
+    <!-- 맨 위로 가는 화살표 버튼 -->
+    <div class="scroll-top" id="scrollTopButton"></div>
+   
+    <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const submarine = document.getElementById('submarine');
+    const loadingScreen = document.getElementById('loading-screen');
+
+    submarine.addEventListener('click', (e) => {
+        // 파동 효과 생성
+        const ripple = document.createElement('div');
+        ripple.classList.add('ripple');
+        ripple.style.left = `${e.clientX - 25}px`;
+        ripple.style.top = `${e.clientY - 25}px`;
+        document.body.appendChild(ripple);
+
+        // 잠수함 애니메이션 시작
+        submarine.classList.add('animate');
+
+        // 1초 후 로딩 화면 제거
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0'; // 서서히 사라짐
+            setTimeout(() => {
+                loadingScreen.style.display = 'none'; // 완전히 숨김
+            }, 1000); // 애니메이션 효과 종료 시간
+        }, 1000); // 애니메이션 지속 시간
+
+        // 2초 후 파동 제거
+        setTimeout(() => {
+            ripple.remove();
+        }, 2000); // ripple 애니메이션 지속 시간
+    });
+});
+        // 스크롤할 때 깊이를 계산해 표시하는 함수
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const depth = Math.floor((scrollPosition - window.innerHeight) / 10); // 메인 배너 높이를 빼고 계산
+            const displayedDepth = depth < 0 ? 0 : depth;
+            document.getElementById('depthText').innerHTML = `해저<br>${displayedDepth}m`;
+
+            // 해저 0미터 이상일 때 목록 상자와 해저 깊이 표시
+            const layerSelect = document.getElementById('layerSelect');
+            const depthText = document.querySelector('.depth');
+            if (scrollPosition >= window.innerHeight) {
+                layerSelect.style.opacity = '1';
+                depthText.style.opacity = '1';
+            } else {
+                layerSelect.style.opacity = '0';
+                depthText.style.opacity = '0';
+            }
+
+            // 물고기들이 서서히 나타나는 효과 적용
+            const fishContainers = document.querySelectorAll('.fish-container');
+            fishContainers.forEach(fish => {
+                const fishTop = fish.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (fishTop < windowHeight - 100) {  // 스크롤 위치와 비교
+                    fish.classList.add('visible');  // visible 클래스 추가
+                } else {
+                    fish.classList.remove('visible');  // visible 클래스 제거
+                }
+            });
+        });
+
+        // 해수층 선택 시 해당 위치로 스크롤
+        document.getElementById('layerSelect').addEventListener('change', function() {
+            const depth = this.value;
+            window.scrollTo({
+                top: depth * 10 + window.innerHeight, // 메인 배너 높이를 더해서 스크롤 위치 조정
+                behavior: 'smooth'
+            });
+        });
+
+        // 맨 위로 가는 버튼 클릭 이벤트
+        document.getElementById('scrollTopButton').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+
+        function createParticles() {
+    const container = document.getElementById('particlesContainer');
+    const particleCount = 20; // 파티클 개수
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // 랜덤 크기 범위 증가 (2-5px -> 3-7px)
+        const size = Math.random() * 4 + 3;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // 랜덤 위치
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // 랜덤 애니메이션 지연
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        // 랜덤 애니메이션 지속 시간 (좀 더 다양한 속도로)
+        const duration = 15 + Math.random() * 15; // 15-30초 범위로 확장
+        particle.style.animationDuration = `${duration}s, ${3 + Math.random() * 2}s`;
+        
+        container.appendChild(particle);
+    }
+}
+// 스크롤 이벤트 핸들러
+function handleScroll() {
+    const container = document.getElementById('particlesContainer');
+    const scrollPosition = window.scrollY;
+    const triggerHeight = window.innerHeight * 2; // 200vh
+
+    if (scrollPosition >= triggerHeight) {
+        container.style.opacity = '1';
+    } else {
+        container.style.opacity = '0';
+    }
+}
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    handleScroll(); // 초기 상태 체크
+    window.addEventListener('scroll', handleScroll);
+});function createParticles() {
+    const container = document.getElementById('particlesContainer');
+    const particleCount = 30; // 파티클 개수
+
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // 랜덤 크기 (2-5px)
+        const size = Math.random() * 3 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // 랜덤 위치
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // 랜덤 애니메이션 지연
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        // 랜덤 애니메이션 지속 시간
+        const duration = 15 + Math.random() * 10;
+        particle.style.animationDuration = `${duration}s, ${3 + Math.random() * 2}s`;
+        
+        container.appendChild(particle);
+    }
+}
+
+// 스크롤 이벤트 핸들러
+function handleScroll() {
+    const container = document.getElementById('particlesContainer');
+    const scrollPosition = window.scrollY;
+    const triggerHeight = window.innerHeight * 2; // 200vh
+
+    if (scrollPosition >= triggerHeight) {
+        container.style.opacity = '1';
+    } else {
+        container.style.opacity = '0';
+    }
+}
+
+// 페이지 로드 시 실행
+document.addEventListener('DOMContentLoaded', () => {
+    createParticles();
+    handleScroll(); // 초기 상태 체크
+    window.addEventListener('scroll', handleScroll);
+});
+    </script>
+
+</body>
+</html>
