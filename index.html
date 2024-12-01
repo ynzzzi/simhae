@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Sea</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 애니메이션 클래스 */
+.fade-in {
+    opacity: 0; /* 초기 상태 숨김 */
+    transform: translateY(20px); /* 아래에서 위로 이동 */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: black);
+            z-index: 1000;
+        }
+
+        .progress-bar__fill {
+            height: 100%;
+            background: #3a608f;
+            transition: width 300ms ease;
+        }
+
+        .nav-gradient {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), transparent);
+        }
+
+        .section-gradient {
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+        }  
+
+        * {
+            margin: 100;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            color: #8b8b8b;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white">
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-bar__fill" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-40 nav-gradient">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-200">The Deep Sea</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-blue-400 transition-colors"> </a>
+                <a href="#" class="hover:text-blue-400 transition-colors"> </a>
+                <a href="#" class="hover:text-blue-400 transition-colors"> </a>
+                <a href="sparkle.html" class="hover:text-blue-400 transition-colors">explore</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="h-screen relative flex items-center justify-center overflow-hidden">
+        <img src="img/wave.gif" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-60"> 
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center">
+            <h1 class="text-6xl md:text-7xl font-serif mb-6 opacity-0 animate-fade-in">
+                The Deep Sea
+            </h1>
+            <p class="text-xl text-blue-200 mb-12 max-w-2xl mx-auto opacity-0 animate-fade-in delay-200">
+                First explore the depths of the magical waters. Discover beauty and creatures that have never been seen before.
+            </p>
+
+        <div class="mt-16 opacity-0 animate-fade-in delay-300">
+            <svg class="w-8 h-8 mx-auto text-blue-400 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m0 0l-6-6m6 6l6-6"/>
+            </svg>
+        </div>
+    </div>
+    </section>
+
+    <br>
+    <br>  
+    <br>
+    <br>    
+    
+
+
+    <div class="container">
+        <div class="header">
+            <h1>심해(深海)는 수권에서 바다의 매우 깊은 구간으로,<br>햇빛이 거의 닿지 않는 곳을 지칭하는 말입니다.</h1>
+            <p>오늘날 알려져 있는 곳 중 가장 깊은 심해는 마리아나 해구로, 약 11,092m(36,400ft) 가량의 깊이로 추산됩니다.<br>
+                '깊다'의 기준은 분야마다 다릅니다. 생태학에서는 광합성을 할 수 없는 수심 200m를 기준으로 두는 반면,<br>
+                해양학에서는 일반적으로 햇빛이 들지 않고 완전한 암흑이 되는 지점인 2,000m를 기준으로 둡니다.<br>
+                다음은 수심으로 나눈 심해의 구조입니다.
+            </p>
+        </div>
+
+        <div class="cards-grid">
+            <a href="Untitled-1.html" class="card">
+                <img src="img/beach.jpg" alt="토스팀 디자이너 10문 10답">
+                <div class="card-content">
+                    <h2 class="card-title">표해수층</h2>
+                    <p class="card-description">수심 0~200m</p>
+                </div>
+            </a>
+
+            <a href="중심해수층.html#" class="card">
+                <img src="img/goong.jpg" alt="토스에서는 모두가 주연">
+                <div class="card-content">
+                    <h2 class="card-title">중심해수층</h2>
+                    <p class="card-description">수심 200~1,000m</p>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <img src="img/simhae.jpg" alt="토스, 디자인, 시스템">
+                <div class="card-content">
+                    <h2 class="card-title">심해중층</h2>
+                    <p class="card-description">수심 1,000~3,000m</p>
+                </div>
+            </a>
+
+            <a href="#" class="card">
+                <img src="img/simhaee.jpg" alt="디자인으로 혁신하기">
+                <div class="card-content">
+                    <h2 class="card-title">심해수층</h2>
+                    <p class="card-description">수심 3,000~6,000m</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    
+    <br>
+    <br>   
+    <br>
+    <br>
+    <!-- Video Section -->
+    <section class="py-32 relative h-screen flex items-center">
+        <img src="img/waves.jpg" alt="Deep Sea Photo" class="absolute inset-0 w-full h-full object-cover opacity-60 fade-in"> <!-- 이미지 태그로 대체 -->
+        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-6xl font-serif mb-8">DOWN IN THE DEEP</h2>
+            <a href="sparkle.html" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2 mx-auto">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                </svg>
+            잠수하기
+            </a>
+        </div>
+    </section>
+
+   
+
+    <script>
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalScroll) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(image => {
+            observer.observe(image);
+        });
+    </script>
+</body>
+</html>
