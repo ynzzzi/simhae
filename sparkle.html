@@ -150,6 +150,92 @@ font-family: "IBM Plex Sans KR";
             font-size: 24px;
             z-index: 2;
         }
+/* wrap 영역 */
+.wrap {
+    background: #68aeca; /* 해저 0미터 배경색 */
+    height: 100vh; /* 화면 전체 높이 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden; /* 웨이브가 영역 밖으로 나가지 않음 */
+}
+    .circle {
+    width: 400px;
+    height: 400px;
+    position: absolute; /* 기존 relative에서 변경 */
+    top: 50%; /* 페이지 중간으로 이동 */
+    left: 50%; /* 페이지 중간으로 이동 */
+    transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+    overflow: hidden;
+    border: 7px solid #464343;
+    border-radius: 100%;
+    background: linear-gradient(#3c5aff, #52f2fd);
+    z-index: 10; /* 다른 요소 위에 위치 */
+}
+
+.wave-one {
+  width: 600px;
+  height: 600px;
+  position: absolute;
+  top: -65%;
+  left: -30%;
+  border-radius: 45%;
+  background: rgba(3,169,244,0.8);
+  animation: move 3s infinite linear;
+}
+
+.wave-two {
+  width: 650px;
+  height: 650px;
+  position: absolute;
+  top: -90%;
+  left: -30%;
+  border-radius: 45%;
+  background: rgba(39, 65, 156, 0.8);
+  animation: move 5s infinite linear;
+}
+
+.wave-three {
+  width: 650px;
+  height: 650px;
+  position: absolute;
+  top: -100%;
+  left: -30%;
+  border-radius: 45%;
+  background: #1d074b;
+  border: 6px solid rgba(131,119,152,0.7);
+  animation: move 7s infinite linear;
+}
+
+.wave-four {
+  width: 650px;
+  height: 650px;
+  position: absolute;
+  top: -100%;
+  left: -30%;
+  border-radius: 46%;
+  background: linear-gradient(rgba(252,251,232,0.1) 10%,                  transparent);
+  animation: move 7s infinite linear;
+}
+
+@keyframes move {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.submarine-complete-text {
+    position: absolute;
+    top: 50%; /* 중앙으로 이동 */
+    left: 50%; /* 중앙으로 이동 */
+    transform: translate(-50%, -50%); /* 정확히 중앙 정렬 */
+    color: white;
+    font-size: 24px; /* 글씨 크기 */
+    font-weight: bold;
+    z-index: 5; /* 웨이브보다 위로 */
+    pointer-events: none; /* 클릭 불가 */
+}
+
 
         /* 아래로 스크롤하라는 화살표 */
         .scroll-down-arrow {
@@ -177,6 +263,7 @@ font-family: "IBM Plex Sans KR";
             position: relative;
             height: 20920px;
             background: linear-gradient(to bottom, #68aeca 0%, #020202 15%, #000000 100%);
+
         }
 
         /* '해저n미터' 표시하는 텍스트 */
@@ -384,6 +471,13 @@ font-family: "IBM Plex Sans KR";
             transition: opacity 0.5s ease;
         }
 
+        .layer-select option {
+    background-color: rgba(255, 255, 255, 0.7); /* 선택지 배경의 투명도 추가 조정 */
+    color: black;
+}
+
+
+
         /* 맨 위로 스크롤하는 화살표 버튼 */
         .scroll-top {
             position: fixed;
@@ -472,14 +566,18 @@ font-family: "IBM Plex Sans KR";
         </div>
     </div>
 
-<div class="particles-container" id="particlesContainer"></div>
-    <!-- 메인 화면 (스크롤 상단의 첫 화면) -->
-    <div class="main-banner">
-        <h2>잠수완료! <br>스크롤을 내려 심해를 탐색해보아요</h2>
-        <div class="wave"></div> <!-- 파도 애니메이션 -->
-        <div class="scroll-down-arrow">▼</div> <!-- 밑으로 향하는 화살표 -->
-    </div>
 
+    <div class="wrap">
+        <div class="circle">
+            <!-- wave -->
+            <div class="wave-one"></div>
+            <div class="wave-two"></div>
+            <div class="wave-three"></div>
+            <div class="wave-four"></div>
+            <div class="submarine-complete-text">잠수 완료!</div> <!-- 추가된 텍스트 -->
+    </div>
+    <div id="particlesContainer" class="particles-container"></div>
+</div>
     <!-- 심해어 소개 섹션 -->
     <div class="ocean">
         <!-- 해수층 선택 상자 -->
@@ -508,7 +606,7 @@ font-family: "IBM Plex Sans KR";
 
         <div class="event event1035">
 
-            <img src="fish/잠수함.png" alt="물고기4">
+            <img src="fish/sub.png" alt="물고기4">
             <div class="event-line"></div>
             군용 잠수함 평균 잠영 깊이 (1035m)
         </div>
@@ -939,38 +1037,35 @@ function handleScroll() {
     }
 }
 
-// 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', () => {
     createParticles();
-    handleScroll(); // 초기 상태 체크
-    window.addEventListener('scroll', handleScroll);
-});function createParticles() {
+
+    // 스크롤 확인 (디버깅용)
+    window.addEventListener('scroll', () => {
+        console.log('스크롤 위치:', window.scrollY);
+    });
+});
+
+function createParticles() {
     const container = document.getElementById('particlesContainer');
-    const particleCount = 30; // 파티클 개수
+    const particleCount = 50;
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        // 랜덤 크기 (2-5px)
-        const size = Math.random() * 3 + 2;
+        const size = Math.random() * 4 + 2;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
-        
-        // 랜덤 위치
         particle.style.left = `${Math.random() * 100}%`;
         particle.style.top = `${Math.random() * 100}%`;
-        
-        // 랜덤 애니메이션 지연
         particle.style.animationDelay = `${Math.random() * 5}s`;
-        
-        // 랜덤 애니메이션 지속 시간
-        const duration = 15 + Math.random() * 10;
-        particle.style.animationDuration = `${duration}s, ${3 + Math.random() * 2}s`;
+        particle.style.animationDuration = `${15 + Math.random() * 10}s, ${3 + Math.random() * 2}s`;
         
         container.appendChild(particle);
     }
 }
+
 
 // 스크롤 이벤트 핸들러
 function handleScroll() {
