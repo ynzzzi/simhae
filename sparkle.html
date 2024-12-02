@@ -58,8 +58,12 @@ font-family: "IBM Plex Sans KR";
 }
 
 .submarine-container {
-    position: relative;
-    cursor: pointer;
+    display: flex; /* 플렉스박스 사용 */
+    flex-direction: column; /* 세로로 정렬 */
+    justify-content: center; /* 세로 중앙 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    cursor: pointer; /* 클릭 가능한 커서 표시 */
 }
 
 #submarine {
@@ -67,6 +71,14 @@ font-family: "IBM Plex Sans KR";
     height: auto;
     cursor: pointer;
     transition: transform 0.3s ease; /* 클릭 시 크기 변화 */
+}
+
+    .submarine-text {
+    color: #ffffff; /* 흰색 */
+    text-align: center;
+    margin-top: 10px; /* 이미지와 간격 */
+    font-size: 16px; /* 글씨 크기 */
+    font-weight: bold; /* 강조 */
 }
 
 #submarine.animate {
@@ -456,6 +468,7 @@ font-family: "IBM Plex Sans KR";
     <div id="loading-screen" class="loading-screen">
         <div class="submarine-container">
             <img id="submarine" src="fish/잠수함.png" alt="잠수함 이미지">
+                        <p class="submarine-text">잠수함을 눌러 심해를 탐색해보세요</p>
         </div>
     </div>
 
