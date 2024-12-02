@@ -8,7 +8,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR:wght@200&family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">   
+   <style>
+
+.audiowide-regular {
+  font-family: "Audiowide", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
         body {
             background-color: black;
             color: white;
@@ -26,8 +38,8 @@
 
 
     h3 {
-        font-family: 'Noto Sans', sans-serif; !important;  /* Noto Sans 폰트 지정 */
-
+        font-family: 'audiowide-regular'; 
+        font-size: 3rem;
     }
 
             /* 01 숫자 스타일 */
@@ -88,6 +100,7 @@
 .section {
   visibility: visible !important;
   opacity: 1 !important;
+  margin-top: 100px;
 }
 
         .delay-200 {
@@ -144,6 +157,13 @@
         .card-hover:hover .image-hover {
             transform: scale(1.1);
         }
+
+                    /* Learning 섹션 중앙 정렬 */
+    .learning-card {
+        text-align: center; /* 텍스트 중앙 정렬 */
+    }
+
+
     </style>
 </head>
 <body class="bg-slate-900 text-white">
@@ -159,7 +179,7 @@
             <div class="hidden md:flex space-x-8">
                 <a href="#" class="hover:text-blue-400 transition-colors"> </a>
                 <a href="#" class="hover:text-blue-400 transition-colors"> </a>
-                <a href="Untitled3.html" class="hover:text-blue-400 transition-colors"> home </a>
+                <a href="index.html" class="hover:text-blue-400 transition-colors"> home </a>
                 <a href="sparkle.html" class="hover:text-blue-400 transition-colors">explore</a>
             </div>
         </div>
@@ -197,8 +217,7 @@
                     <img src="img/10.jpg" alt="Diver" class="rounded-lg">
                 </div>
                 <div>
-                    <h4 class="text-blue-400 mb-4"> </h4>
-                    <h3> </h3>
+                    <h3 class="audiowide-regular">Definition </h3>
                     <p class="text-blue-200 mb-8">
                         심해중층은 수심 1,000m에서 2,000m 사이로, <Br>
                             극도로 차가운 수온과 높은 수압이 특징입니다. 
@@ -215,8 +234,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in">
 
                 <div>
-                    <h4 class="text-blue-400 mb-4">             </h4>
-                    <h3> </h3>
+                    <h3 class="audiowide-regular">Environment</h3>
                     <p class="text-blue-200 mb-8">
                         이 공간은 빛이 전혀 들어오지 않는 완전한 암흑 상태이며, <br>특수한 생존 메커니즘을 가진 생물들만이 서식할 수 있습니다.<br>
                         해류의 순환과 해양 생태계의 중요한 역할을 담당하고 있으며, 발광 생물, 특수 적응 심해 어류, 그리고 대형 무척추동물들이 이 환경에 적응해 살아갑니다.
@@ -226,7 +244,7 @@
                     </button>
                 </div>
                 <div class="relative">
-                    <img src="fish/ooc.png" alt="Diver" class="rounded-lg">
+                    <img src="img/11.jpeg" alt="Diver" class="rounded-lg">
                 </div>
             </div>
         </div>
@@ -236,11 +254,10 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center fade-in">
                 <div class="relative">
-                    <img src="img/7.jpg" alt="Diver" class="rounded-lg">
+                    <img src="img/12.jpg" alt="Diver" class="rounded-lg">
                 </div>
                 <div>
-                    <h4 class="text-blue-400 mb-4">      </h4>
-
+                    <h3 class="audiowide-regular">Feature</h3>
                     <p class="text-blue-200 mb-8">
                         수온은 대략 영상 4도 근처로 유지되며, <br>엄청난 수압으로 인해 생물들은 놀라운 생존 전략을 발달시켰습니다.
                     </p>
@@ -260,22 +277,22 @@
     <div class="max-w-7xl mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="card-hover relative overflow-hidden rounded-lg">
-                <img src="img/6.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <img src="img/13.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
             </div>
             <div class="card-hover relative overflow-hidden rounded-lg">
-                <img src="img/8.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <img src="img/14.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
             </div>
             <div class="card-hover relative overflow-hidden rounded-lg">
-                <img src="img/9.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <img src="img/15.png" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
             </div>
             <div class="card-hover relative overflow-hidden rounded-lg">
-                <img src="img/4.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
+                <img src="img/16.jpg" alt="Turtle" class="w-full aspect-[3/4] object-cover image-hover">
                 <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 <h3 class="absolute bottom-4 left-4 text-lg font-bold"> </h3>
             </div>
@@ -295,25 +312,25 @@
                 Another depth
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300">
-                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50"></div>
+                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300 learning-card">
+                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50 mx-auto"></div>
                     <h3 class="text-xl font-bold mb-4">표해수층</h3>
-                    <p class="text-blue-200 mb-6">Begin your diving journey with basic certification and guided experiences.</p>
+                    <p class="text-blue-200 mb-6">수심 0 ~ 200m</p>
                     <a href="Untitled-1.html"><button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button></a>
                 </div>
 
-                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300">
-                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50"></div>
-                    <h3 class="text-xl font-bold mb-4">심해중층</h3>
-                    <p class="text-blue-200 mb-6">Begin your diving journey with basic certification and guided experiences.</p>
-                    <button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button>
+                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300 learning-card">
+                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50 mx-auto"></div>
+                    <h3 class="text-xl font-bold mb-4">중심해수층</h3>
+                    <p class="text-blue-200 mb-6">수심 200 ~ 1000m</p>
+                    <a href="jsimhae.html"><button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button></a>
                 </div>
                 
-                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300">
-                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50"></div>
+                <div class="bg-slate-700/50 p-8 rounded-lg hover:bg-slate-700/70 transition-colors duration-300 learning-card">
+                    <div class="w-16 h-16 mb-6 rounded-full border-2 border-blue-400/50 mx-auto"></div>
                     <h3 class="text-xl font-bold mb-4">심해수층</h3>
-                    <p class="text-blue-200 mb-6">Begin your diving journey with basic certification and guided experiences.</p>
-                    <button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button>
+                    <p class="text-blue-200 mb-6">수심 3000 ~ 6000m</p>
+                    <a href="simhae1.html"><button class="text-blue-400 hover:text-blue-300 transition-colors">FIND OUT MORE</button></a>
                 </div>
                                 <!-- Repeat for other learning cards -->
             </div>
